@@ -266,6 +266,7 @@ section{position:relative;padding:100px 0}
 .can{position:relative;width:200px;height:260px;transform-style:preserve-3d;animation:spin 14s linear infinite}
 .can:hover{animation-play-state:paused}
 .can .face{position:absolute;top:0;left:50%;width:84px;height:260px;margin-left:-42px;background:linear-gradient(90deg,#0d0e10,#2a2c31 50%,#0d0e10);border-top:6px solid #3a3d44;border-bottom:6px solid #3a3d44;backface-visibility:hidden;display:flex;align-items:center;justify-content:center}
+.can .face .lbl{position:absolute;left:0;right:0;top:50%;height:120px;margin-top:-60px;background-image:var(--logo,none);background-repeat:no-repeat;filter:drop-shadow(0 1px 0 rgba(0,0,0,.4))}
 .can .face span{writing-mode:vertical-rl;transform:rotate(180deg);font:900 1.2rem var(--f-display);letter-spacing:.2em;color:var(--signal)}
 .can .cap{position:absolute;left:50%;top:50%;width:200px;height:200px;margin:-100px 0 0 -100px;border-radius:50%;background:radial-gradient(circle,#3a3d44,#1b1c20 70%)}
 .can .cap.t{transform:rotateX(90deg) translateZ(130px)}
@@ -1052,7 +1053,13 @@ if (finePointer && !reduce){
     const R = 100 * Math.cos(Math.PI/N);
     f.style.transform = `rotateY(${i*360/N}deg) translateZ(${R}px)`;
     f.style.width = (2*100*Math.sin(Math.PI/N)+1)+'px'; f.style.marginLeft = -(100*Math.sin(Math.PI/N)+.5)+'px';
-    if (i%7===0) f.innerHTML = '<span>BLACKMAC</span>';
+    const fw = 2*100*Math.sin(Math.PI/N), k = i % 7;
+    if (k <= 4){
+      const lab = document.createElement('i'); lab.className = 'lbl';
+      lab.style.backgroundSize = (fw*5) + 'px auto';
+      lab.style.backgroundPosition = (-k*fw) + 'px center';
+      f.appendChild(lab);
+    }
     can.appendChild(f);
   }
   ['t','b'].forEach(k => { const c = document.createElement('div'); c.className='cap '+k; can.appendChild(c); });
