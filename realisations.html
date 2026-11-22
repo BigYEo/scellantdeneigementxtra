@@ -261,7 +261,7 @@ section{position:relative;padding:100px 0}
 .step p{color:var(--muted);font-size:.92rem}
 
 /* Produit BlackMac */
-.product{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:center;margin-top:90px;background:radial-gradient(600px 400px at 20% 50%,color-mix(in srgb,var(--accent) 10%,transparent),transparent 70%),linear-gradient(135deg,#080a0e,#161c25);border:1px solid var(--line);border-radius:30px;padding:56px;overflow:hidden}
+.product{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:center;margin-top:90px;background:radial-gradient(600px 400px at 20% 50%,color-mix(in srgb,var(--accent) 10%,transparent),transparent 70%),linear-gradient(90deg,rgba(8,10,14,.55),rgba(8,10,14,.92) 55%),url("images/photos/scellant-fini-gros-plan.jpg") center/cover,linear-gradient(135deg,#080a0e,#161c25);border:1px solid var(--line);border-radius:30px;padding:56px;overflow:hidden}
 .can-stage{perspective:900px;display:grid;place-items:center;min-height:340px}
 .can{position:relative;width:200px;height:260px;transform-style:preserve-3d;animation:spin 14s linear infinite}
 .can:hover{animation-play-state:paused}
@@ -296,6 +296,39 @@ section{position:relative;padding:100px 0}
 .ring-dots i{width:8px;height:8px;border-radius:50%;background:var(--line);transition:background .3s,width .3s}
 .ring-dots i.on{background:var(--accent);width:24px;border-radius:8px}
 
+/* Vidéos (reels) */
+.reels-sec{background:radial-gradient(900px 500px at 50% 100%,color-mix(in srgb,var(--accent) 10%,transparent),transparent 70%)}
+.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;perspective:1400px;max-width:1000px;margin:0 auto}
+.reel{all:unset;box-sizing:border-box;position:relative;aspect-ratio:9/16;border-radius:26px;overflow:hidden;cursor:pointer;background:#0d1117;border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 80px -40px rgba(0,0,0,.9),0 0 0 6px rgba(255,255,255,.03);transform-style:preserve-3d;transition:transform .6s var(--ease),box-shadow .5s,border-color .4s}
+.reel:nth-child(1){transform:rotateY(14deg) rotateZ(-2deg) translateY(26px)}
+.reel:nth-child(3){transform:rotateY(-14deg) rotateZ(2deg) translateY(26px)}
+.reels:hover .reel{transform:none}
+.reel:hover{border-color:var(--accent);box-shadow:0 50px 90px -40px var(--glow),0 0 0 6px color-mix(in srgb,var(--accent) 18%,transparent)}
+.reel:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease),filter .5s}
+.reel:hover video{transform:scale(1.05)}
+.reel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 22%,transparent 55%,rgba(0,0,0,.85));pointer-events:none}
+.reel-shine{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(420px circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.18),transparent 45%);opacity:0;transition:opacity .4s}
+.reel:hover .reel-shine{opacity:1}
+.reel-top{position:absolute;top:16px;left:16px;z-index:3;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.14)}
+.reel-cap{position:absolute;left:18px;right:18px;bottom:18px;z-index:3;display:flex;flex-direction:column;gap:3px;transform:translateZ(40px)}
+.reel-cap b{font:800 1.15rem var(--f-display);color:#fff}
+.reel-cap span{font-size:.85rem;color:#d3dbe4}
+.reel-play{position:absolute;top:50%;left:50%;z-index:3;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.18);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.35);color:#fff;transform:scale(.85);opacity:0;transition:opacity .35s,transform .45s var(--ease)}
+.reel-play svg{width:26px;margin-left:3px}
+.reel:hover .reel-play,.reel.paused .reel-play{opacity:1;transform:scale(1)}
+.vlb{position:fixed;inset:0;z-index:310;background:rgba(5,7,10,.96);display:none;align-items:center;justify-content:center;padding:20px}
+.vlb.on{display:flex;animation:fade .3s}
+.vlb video{max-height:88vh;max-width:92vw;aspect-ratio:9/16;border-radius:18px;background:#000;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+.vlb button{position:absolute;top:20px;right:20px;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:1.3rem;cursor:pointer}
+/* Vidéo d'arrière-plan des bannières */
+.ph-video{position:absolute;inset:0;z-index:-1;overflow:hidden}
+.ph-video{transition:opacity .8s}
+body:not(.ete) .ph-video{opacity:0}
+.page-hero .ph-photo{transition:opacity .8s}
+body.ete .page-hero.has-video .ph-photo{opacity:0}
+.ph-video video{width:100%;height:100%;object-fit:cover;opacity:.42;transform:scale(1.06);filter:saturate(1.05)}
+.ph-video::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 8%,rgba(11,15,21,.55) 55%,rgba(11,15,21,.3)),linear-gradient(0deg,var(--ink),transparent 45%)}
 /* Réalisations */
 .real{background:var(--ink-2)}
 .pgrid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:230px;gap:14px}
@@ -525,6 +558,10 @@ footer .logo.has-img .logo-img{height:64px}
   .ring-stage{height:420px}
   .ring{width:250px;height:330px}
   .pgrid{grid-auto-rows:170px}
+  .reels{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -20px;padding:6px 20px 16px;perspective:none;scrollbar-width:none}
+  .reels::-webkit-scrollbar{display:none}
+  .reel{flex:0 0 68%;scroll-snap-align:center;transform:none!important}
+  .reel-play{opacity:1;transform:scale(.9)}
   .pgrid button:nth-child(1),.pgrid button:nth-child(8){grid-row:span 1}
   .score{--size:104px;padding:6px}
   .score b{font-size:1.9rem}
@@ -663,8 +700,8 @@ header .brand-logo{margin:6px 0}
   <a class="btn btn-primary" href="contact.html#soumission">Soumission gratuite <svg><use href="#i-arrow"/></svg></a>
 </div>
 
-<section class="page-hero has-photo">
-  <div class="ph-photo" style="background-image:url(images/photos/scellant-vue-aerienne.jpg)"></div>
+<section class="page-hero has-photo has-video">
+  <div class="ph-photo" style="background-image:url(images/photos/scellant-vue-aerienne.jpg)"></div><div class="ph-video" aria-hidden="true"><video muted loop playsinline autoplay preload="auto" poster="videos/bg-realisations.jpg"><source src="videos/bg-realisations.mp4" type="video/mp4"></video></div>
   <div class="hero-glow"></div>
   <canvas id="scene" aria-hidden="true"></canvas>
   <div class="wrap">
@@ -688,6 +725,38 @@ header .brand-logo{margin:6px 0}
     <div class="pgrid rv" id="pgrid"></div>
     <p class="gal-empty" id="galEmpty" hidden>Les photos de nos réalisations s'affichent ici une fois le site en ligne.</p>
     <div class="more-wrap" id="moreWrap"><button class="btn btn-ghost" id="moreBtn">Voir toutes les réalisations</button></div>
+  </div>
+</section>
+
+<section id="videos" class="reels-sec">
+  <div class="wrap">
+    <div class="head rv">
+      <div><span class="eyebrow">En vidéo</span><h2>Le résultat, <span class="serif">comme si vous y étiez.</span></h2></div>
+      <p>Tournées sur nos chantiers, quelques minutes après l'application du scellant. Touchez une vidéo pour la voir en grand.</p>
+    </div>
+    <div class="reels rv" id="reels">
+        <button type="button" class="reel tilt" data-src="videos/reel-entree-pente.mp4" aria-label="Voir la vidéo : Entrée en pente">
+          <video muted loop playsinline preload="none" poster="videos/reel-entree-pente.jpg"><source src="videos/reel-entree-pente.mp4" type="video/mp4"></video>
+          <span class="reel-shine"></span>
+          <span class="reel-top"><span class="live">EN VIDÉO</span></span>
+          <span class="reel-cap"><b>Entrée en pente</b><span>Fraîchement scellée</span></span>
+          <span class="reel-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+        </button>
+        <button type="button" class="reel tilt" data-src="videos/reel-entrees-jumelees.mp4" aria-label="Voir la vidéo : Entrées jumelées">
+          <video muted loop playsinline preload="none" poster="videos/reel-entrees-jumelees.jpg"><source src="videos/reel-entrees-jumelees.mp4" type="video/mp4"></video>
+          <span class="reel-shine"></span>
+          <span class="reel-top"><span class="live">EN VIDÉO</span></span>
+          <span class="reel-cap"><b>Entrées jumelées</b><span>Le noir profond BlackMac</span></span>
+          <span class="reel-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+        </button>
+        <button type="button" class="reel tilt" data-src="videos/reel-entree-double.mp4" aria-label="Voir la vidéo : Entrée double">
+          <video muted loop playsinline preload="none" poster="videos/reel-entree-double.jpg"><source src="videos/reel-entree-double.mp4" type="video/mp4"></video>
+          <span class="reel-shine"></span>
+          <span class="reel-top"><span class="live">EN VIDÉO</span></span>
+          <span class="reel-cap"><b>Entrée double</b><span>Juste avant le séchage</span></span>
+          <span class="reel-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+        </button>
+    </div>
   </div>
 </section>
 
@@ -775,6 +844,7 @@ function setSeason(s, animate=true){
   if (scene) scene.setMode(s);
   if (game) game.reset();
   if ($('.tab')) setTab(s==='ete' ? 't-asphalte' : 't-neige');
+  document.querySelectorAll('.ph-video video').forEach(v => { if (s === 'ete' && !reduce) { const p = v.play(); if (p) p.catch(()=>{}); } else v.pause(); });
 }
 $$('.season button').forEach(b => b.addEventListener('click', () => { if (b.dataset.season !== season) setSeason(b.dataset.season); }));
 
@@ -1033,7 +1103,7 @@ if (finePointer && !reduce){
 
 /* ---------- Galerie ---------- */
 (() => {
-  const DATA = [{"thumb": "images/photos/thumb/scellant-application.jpg", "full": "images/photos/scellant-application.jpg", "cat": "scellant", "cap": "Application du scellant BlackMac"}, {"thumb": "images/photos/thumb/scellant-entree-carport.jpg", "full": "images/photos/scellant-entree-carport.jpg", "cat": "scellant", "cap": "Entrée résidentielle scellée à neuf"}, {"thumb": "images/photos/thumb/deneigement-souffleuse.jpg", "full": "images/photos/deneigement-souffleuse.jpg", "cat": "deneigement", "cap": "Souffleuse en action après une tempête"}, {"thumb": "images/photos/thumb/lignage-immeuble.jpg", "full": "images/photos/lignage-immeuble.jpg", "cat": "lignage", "cap": "Scellant et lignage d'un stationnement d'immeuble"}, {"thumb": "images/photos/thumb/scellant-entree-bungalow.jpg", "full": "images/photos/scellant-entree-bungalow.jpg", "cat": "scellant", "cap": "Entrée double fraîchement scellée"}, {"thumb": "images/photos/thumb/scellant-vue-aerienne.jpg", "full": "images/photos/scellant-vue-aerienne.jpg", "cat": "scellant", "cap": "Vue aérienne : grande entrée scellée"}, {"thumb": "images/photos/thumb/scellant-entree-pancarte.jpg", "full": "images/photos/scellant-entree-pancarte.jpg", "cat": "scellant", "cap": "Un noir profond… et des voisins jaloux"}, {"thumb": "images/photos/thumb/lignage-stationnement-commercial.jpg", "full": "images/photos/lignage-stationnement-commercial.jpg", "cat": "lignage", "cap": "Lignage d'un stationnement commercial"}, {"thumb": "images/photos/thumb/deneigement-tracteur-matin.jpg", "full": "images/photos/deneigement-tracteur-matin.jpg", "cat": "deneigement", "cap": "Déneigement au petit matin"}, {"thumb": "images/photos/thumb/lignage-condos.jpg", "full": "images/photos/lignage-condos.jpg", "cat": "lignage", "cap": "Lignage jaune, stationnement de condos"}, {"thumb": "images/photos/thumb/scellant-entree-moderne.jpg", "full": "images/photos/scellant-entree-moderne.jpg", "cat": "scellant", "cap": "Entrée résidentielle scellée"}, {"thumb": "images/photos/thumb/reparation-fissures-scellant.jpg", "full": "images/photos/reparation-fissures-scellant.jpg", "cat": "scellant", "cap": "Fissures réparées, puis scellées"}, {"thumb": "images/photos/thumb/scellant-maisons-jumelees.jpg", "full": "images/photos/scellant-maisons-jumelees.jpg", "cat": "scellant", "cap": "Entrée de maisons jumelées"}, {"thumb": "images/photos/thumb/lignage-stationnement-residentiel.jpg", "full": "images/photos/lignage-stationnement-residentiel.jpg", "cat": "lignage", "cap": "Stationnement résidentiel scellé et ligné"}, {"thumb": "images/photos/thumb/scellant-entree-pente.jpg", "full": "images/photos/scellant-entree-pente.jpg", "cat": "scellant", "cap": "Entrée en pente scellée"}, {"thumb": "images/photos/thumb/scellant-entree-cloture.jpg", "full": "images/photos/scellant-entree-cloture.jpg", "cat": "scellant", "cap": "Entrée étroite le long d'une clôture"}, {"thumb": "images/photos/thumb/scellant-abri-auto.jpg", "full": "images/photos/scellant-abri-auto.jpg", "cat": "scellant", "cap": "Aire de stationnement sous abri"}];
+  const DATA = [{"thumb": "images/photos/thumb/scellant-application.jpg", "full": "images/photos/scellant-application.jpg", "cat": "scellant", "cap": "Application du scellant BlackMac"}, {"thumb": "images/photos/thumb/scellant-entree-carport.jpg", "full": "images/photos/scellant-entree-carport.jpg", "cat": "scellant", "cap": "Entrée résidentielle scellée à neuf"}, {"thumb": "images/photos/thumb/deneigement-souffleuse.jpg", "full": "images/photos/deneigement-souffleuse.jpg", "cat": "deneigement", "cap": "Souffleuse en action après une tempête"}, {"thumb": "images/photos/thumb/scellant-fini-gros-plan.jpg", "full": "images/photos/scellant-fini-gros-plan.jpg", "cat": "scellant", "cap": "Le fini lustré du scellant BlackMac, vu de près"}, {"thumb": "images/photos/thumb/lignage-immeuble.jpg", "full": "images/photos/lignage-immeuble.jpg", "cat": "lignage", "cap": "Scellant et lignage d'un stationnement d'immeuble"}, {"thumb": "images/photos/thumb/scellant-entree-bungalow.jpg", "full": "images/photos/scellant-entree-bungalow.jpg", "cat": "scellant", "cap": "Entrée double fraîchement scellée"}, {"thumb": "images/photos/thumb/scellant-vue-aerienne.jpg", "full": "images/photos/scellant-vue-aerienne.jpg", "cat": "scellant", "cap": "Vue aérienne : grande entrée scellée"}, {"thumb": "images/photos/thumb/scellant-entree-pancarte.jpg", "full": "images/photos/scellant-entree-pancarte.jpg", "cat": "scellant", "cap": "Un noir profond… et des voisins jaloux"}, {"thumb": "images/photos/thumb/lignage-stationnement-commercial.jpg", "full": "images/photos/lignage-stationnement-commercial.jpg", "cat": "lignage", "cap": "Lignage d'un stationnement commercial"}, {"thumb": "images/photos/thumb/deneigement-tracteur-matin.jpg", "full": "images/photos/deneigement-tracteur-matin.jpg", "cat": "deneigement", "cap": "Déneigement au petit matin"}, {"thumb": "images/photos/thumb/lignage-condos.jpg", "full": "images/photos/lignage-condos.jpg", "cat": "lignage", "cap": "Lignage jaune, stationnement de condos"}, {"thumb": "images/photos/thumb/scellant-entree-moderne.jpg", "full": "images/photos/scellant-entree-moderne.jpg", "cat": "scellant", "cap": "Entrée résidentielle scellée"}, {"thumb": "images/photos/thumb/reparation-fissures-scellant.jpg", "full": "images/photos/reparation-fissures-scellant.jpg", "cat": "scellant", "cap": "Fissures réparées, puis scellées"}, {"thumb": "images/photos/thumb/scellant-maisons-jumelees.jpg", "full": "images/photos/scellant-maisons-jumelees.jpg", "cat": "scellant", "cap": "Entrée de maisons jumelées"}, {"thumb": "images/photos/thumb/lignage-stationnement-residentiel.jpg", "full": "images/photos/lignage-stationnement-residentiel.jpg", "cat": "lignage", "cap": "Stationnement résidentiel scellé et ligné"}, {"thumb": "images/photos/thumb/scellant-entree-pente.jpg", "full": "images/photos/scellant-entree-pente.jpg", "cat": "scellant", "cap": "Entrée en pente scellée"}, {"thumb": "images/photos/thumb/scellant-entree-cloture.jpg", "full": "images/photos/scellant-entree-cloture.jpg", "cat": "scellant", "cap": "Entrée étroite le long d'une clôture"}, {"thumb": "images/photos/thumb/scellant-abri-auto.jpg", "full": "images/photos/scellant-abri-auto.jpg", "cat": "scellant", "cap": "Aire de stationnement sous abri"}];
   const grid = $('#pgrid'), moreWrap = $('#moreWrap'), moreBtn = $('#moreBtn'), filters = $('#gfilters');
   if (!grid) return;
   const LABEL = {deneigement:'Déneigement', scellant:'Scellant', lignage:'Lignage'};
@@ -1091,6 +1161,35 @@ if (finePointer && !reduce){
   lb.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
   lb.addEventListener('touchend', e => { if (sx===null) return; const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx)>50) show(li + (dx<0?1:-1)); sx = null; });
   addEventListener('keydown', e => { if (!lb.classList.contains('on')) return; if (e.key==='Escape') close(); if (e.key==='ArrowLeft') show(li-1); if (e.key==='ArrowRight') show(li+1); });
+})();
+
+/* ---------- Vidéos ---------- */
+(() => {
+  const saveData = !!(navigator.connection && navigator.connection.saveData);
+  const vids = $$('.reel video, .ph-video video');
+  if (!vids.length) return;
+  const vio = new IntersectionObserver(es => es.forEach(e => {
+    const v = e.target, card = v.closest('.reel');
+    const isBg = !card;
+    if (e.isIntersecting && !reduce && !saveData && !(isBg && season !== 'ete')){
+      if (v.preload === 'none') v.preload = 'auto';
+      const p = v.play(); if (p) p.then(() => card && card.classList.remove('paused')).catch(() => card && card.classList.add('paused'));
+    } else { v.pause(); if (card) card.classList.add('paused'); }
+  }), {threshold:.3});
+  vids.forEach(v => { v.muted = true; vio.observe(v); });
+  if (finePointer && !reduce) $$('.reel').forEach(el => el.addEventListener('pointermove', e => {
+    const r = el.getBoundingClientRect(); el.style.setProperty('--gx', (e.clientX-r.left)/r.width*100+'%'); el.style.setProperty('--gy', (e.clientY-r.top)/r.height*100+'%');
+  }));
+  const reels = $$('.reel'); if (!reels.length) return;
+  const m = document.createElement('div'); m.className = 'vlb'; m.setAttribute('role','dialog'); m.setAttribute('aria-modal','true'); m.setAttribute('aria-label','Vidéo');
+  m.innerHTML = '<button type="button" aria-label="Fermer la vidéo">✕</button><video controls playsinline loop></video>';
+  document.body.appendChild(m);
+  const mv = $('video', m); let opener = null;
+  const close = () => { mv.pause(); mv.removeAttribute('src'); mv.load(); m.classList.remove('on'); document.body.style.overflow=''; if (opener) opener.focus(); };
+  reels.forEach(r => r.addEventListener('click', () => { opener = r; mv.src = r.dataset.src; mv.muted = false; m.classList.add('on'); document.body.style.overflow='hidden'; mv.play().catch(()=>{}); $('button', m).focus(); }));
+  $('button', m).addEventListener('click', close);
+  m.addEventListener('click', e => { if (e.target === m) close(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && m.classList.contains('on')) close(); });
 })();
 
 /* ---------- Formulaire ---------- */
